@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <title>Winter 14</title>
+    <link href="http://saasmath.seattleacademy.org/css/bootstrap.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+    <script>
+    $(document).ready(function() {
+ 
+        $('input').attr('size',7);
+ 
+        var count = 120
+                var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+                function timer() {
+                    count = count - 1;
+ 
+                    if (count <= 0) {
+                        clearInterval(counter);
+                        alert("Times up!")
+                        return;
+                    }
+ 
+                    $("#elapsedtime").html(count);
+                }
+                $('#reset').click(function() {
+                    $('input').val("");
+                    $('input').removeClass("correct");
+                    $('input').removeClass("incorrect");
+                    $('.mark').html("");
+                    $('#countReset').val("10")
+                    $('#percorrect').text(100);
+                    $('#pererror').text(0.00);
+                    $('#errors').text(0);
+                    $('#correct').text(0);
+                    count = 120
+                });
+ 
+ 
+                $('input').change(function() {
+ 
+                    correct=$(this).data('correct');
+                    response=$(this).val();
+ 
+                    if(correct==response){
+                        $(this).removeClass("incorrect").addClass("correct");
+                        numcorrect = $('#correct').text();
+                        //We multiply by 1 change from type text to number
+                        $('#correct').text(numcorrect*1+1);
+                    }
+                    else
+                    {
+                        $(this).removeClass("correct").addClass("incorrect");
+                        numerrors = $('#errors').text();
+                        $('#errors').text(numerrors*1+1);
+                    }
+                        console.log (numcorrect);
+                    if (numcorrect >= 5) {
+                        $('#bonus-picture').removeClass('hide');
+                    }
+                    if (numcorrect >= 10) {
+                        $(this).parent().next().removeClass('hide');
+                    }
+                    if (numcorrect >= 15) {
+                        $(this).parent().next().removeClass('hide');
+                    }
+                    if (numcorrect >= 20) {
+                        $(this).parent().next().removeClass('hide');
+                    }
+ 
+                });
+            });
+</script>
+ 
+<style type="text/css">
+input {
+ 
+}
+.correct { 
+    background: #90EE90;
+}
+ 
+.incorrect { 
+    background: #ED9090;
+}
+ 
+#score{
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border:2px solid gray;
+    background: rgb(234,255,252);
+}
+ 
+.score {
+    margin-right: 7px;
+}
+#bonus-picture{
+    position:absolute;
+    top:200px;
+    z-index: -2;
+}
+ 
+</style>
+ 
+</head>
+ 
+<body>
+    <div class="container">
+        <div id="score">
+            <strong>Correct:</strong> <span class="score" id="correct">0</span>
+            <strong>Errors:</strong>  <span class="score" id="errors">0</span>
+            <strong>Time:</strong> <span class="score" id="elapsedtime">0</span>
+        </div>
+ 
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div id="quiz">
+ 
+                    <h3>Answer the following questions:</h3>
+ 
+                    <div class="body">
+ 
+                        <div class="col-md-12 col-sm-12 col-xs-12 row">
+                            <div class="col-md-3 col-sm-3 col-xs-3 input">
+                                <p>\( \sqrt[3]{64}\)<input data-correct ="4" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3 input">
+                                <p>\(\sqrt{1024}\)<input data-correct ="32" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3 input">
+                                <p>\(\sqrt [3]{343}\)<input data-correct ="7" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3 input">
+                                <p>\(\sqrt[3]{216}\)<input data-correct ="6" type="text"/><span></span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 row">
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\( 64^\tfrac{5}{6}\)<input data-correct ="1/512" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\( 64^\tfrac{7}{6}\)<input data-correct ="1/512" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\(  64^\tfrac{-2}{3} \)<input data-correct ="1/16" type="text"/><span></span></p>
+                            </div> 
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 row">
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\( (-64)^\tfrac{2}{3} \)<input data-correct ="16" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\( -(64^\tfrac{2}{3})\)<input data-correct ="-16" type="text"/><span></span></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 input">
+                                <p>\( -(100^\tfrac{-3}{2})\)<input data-correct ="256" type="text"/><span></span></p>
+                            </div>
+                        </div>
+                            
+ 
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 botton">
+                                <!--<button id="reset">reset</button>-->
+                                <button type="button" id="reset" class="btn btn-primary" autocomplete="off">Reset</button>
+                            </div>
+                        <div id="bonus-picture" class="hide" ;><img src="Photos/flower-1.jpg" height:"50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+ 
+</html>
